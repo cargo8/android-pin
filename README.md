@@ -83,17 +83,7 @@ This configuration will instruct your `PinFragment` instance to run `onSave()` a
 Including in your project
 =========================
 
-This library is hosted on Maven Central; to include add the following to your `pom.xml`
-
-```
-<dependency>
-  <groupId>com.venmo.android.pin</groupId>
-  <artifactId>library</artifactId>
-  <version>0.1</version>
-</dependency>
-```
-
-For gradle builds, add the following to your `build.gradle`
+This library is hosted on Maven Central. For gradle builds, add the following to your `build.gradle`
 
 ```
 repositories {
