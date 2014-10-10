@@ -3,6 +3,8 @@ Android-Pin
 
 An easy drop-in PIN controller for Android
 
+![demo_gif](https://github.com/venmo/android-pin/blob/master/demo/pindemo.gif)
+
 Usage
 =====
 [`PinFragment`](https://github.com/venmo/android-pin/blob/master/library/src/main/java/com/venmo/android/pin/PinFragment.java) is the primary class provided by this library. A `PinFragment` should be instantiated either for a PIN creation, or for PIN validation. 
