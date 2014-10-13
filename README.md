@@ -9,7 +9,7 @@ Usage
 =====
 [`PinFragment`](https://github.com/venmo/android-pin/blob/master/library/src/main/java/com/venmo/android/pin/PinFragment.java) is the primary class provided by this library. A `PinFragment` should be instantiated either for a PIN creation, or for PIN validation. 
 
-```
+```java
 Fragment toShow = PinHelper.hasDefaultPinSaved(this) ?
                 PinFragment.newInstanceForVerification() : 
                 PinFragment.newInstanceForCreation();
@@ -21,7 +21,7 @@ getFragmentManager().beginTransaction()
 
 A hosting `Activity` should implement `PinFragment.Listener` to perform actions when a PIN has been created or validated. 
 
-```
+```java
 public interface Listener {
     public void onValidated();
     public void onPinCreated();
@@ -30,7 +30,7 @@ public interface Listener {
 
 By default, a user's PIN is saved in the default `SharedPreference` store, and validated against that store. To override this behavior, instantiate your `PinFragment` with a `PinFragmentConfiguration` that provides . An example of a configuration might be
 
-```
+```java
 PinFragmentConfiguration config = 
     new PinFragmentConfiguration(context)
       .pinSaver(new PinSaver(){
@@ -47,7 +47,7 @@ PinFragmentConfiguration config =
 
 Then, instantiation of your `PinFragment` might look like this
 
-```
+```java
 Fragment toShow = doesHavePinSavedSomewhere() ?
                 PinFragment.newInstanceForVerification(config) :
                 PinFragment.newInstanceForCreation(config);
@@ -63,18 +63,18 @@ Asynchronous Handling
 =====================
 A very common use case for providing an alternative `Validator` and `PinSaver` is if you persist a user's PIN remotely and validate by making a request to your server. In this case, `PinFragment` can execute your saving and checking on a background thread and show a `ProgressBar` while executing. To utilize this, pass implementations of `AsyncSaver` and `AsyncValidator` to your configuration.
 
-```
+```java
 PinFragmentConfiguration config = 
   new PinFragmentConfiguration(context)
     .pinSaver(new AsyncPinSaver(){
         public void onSave(String pin){
-            HttpClient client = //...
-            client.savePin(pin);
+            MyApi api = //...
+            api.savePin(pin);
         }
     }).validator(new AsyncValidator(){
         public boolean isValid(String submission){
-            // HttpClient client = ...
-            // boolean valid = client.comparePin(submission);
+            MyApi api = ...
+            boolean valid = api.comparePin(submission);
             return valid;
       }
     });
@@ -87,7 +87,7 @@ Including in your project
 
 This library is hosted on Maven Central. For gradle builds, add the following to your `build.gradle`
 
-```
+```java
 repositories {
     mavenCentral()
 }
