@@ -87,7 +87,7 @@ Including in your project
 
 This library is hosted on Maven Central. For gradle builds, add the following to your `build.gradle`
 
-```java
+```groovy
 repositories {
     mavenCentral()
 }
