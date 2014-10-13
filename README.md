@@ -99,5 +99,5 @@ dependencies {
 
 Contributing
 =============
-Contributions are encouraged! If you would like to contribute, fork this repository and send a pull request. Please make sure to follow the project code style if possible. `.iml/codeStyleSettings` is provided for your convenience in Android Studio/IntelliJ.
+Contributions are encouraged! If you would like to contribute, fork this repository and send a pull request. Please make sure to follow the project code style if possible. The project file `.idea/codeStyleSettings.xml` is provided for your convenience in Android Studio/IntelliJ.
 
