@@ -28,7 +28,7 @@ public interface Listener {
 }
 ```
 
-By default, a user's PIN is saved in the default `SharedPreference` store, and validated against that store. To override this behavior, instantiate your `PinFragment` with a `PinFragmentConfiguration` that provides . An example of a configuration might be
+By default, a user's PIN is saved in the default `SharedPreference` store, and validated against that store. To override this behavior, instantiate your `PinFragment` with a `PinFragmentConfiguration` that provides custom saving and validating logic. An example of a configuration might be
 
 ```java
 PinFragmentConfiguration config = 
