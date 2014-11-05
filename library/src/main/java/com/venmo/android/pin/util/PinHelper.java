@@ -12,9 +12,8 @@ import java.util.Arrays;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-
 public class PinHelper {
+    private static final String KEY_SHARED_PREFS = "com.venmo.pin.shared_prefs_key";
     private static final String KEY_PINPUT_PIN_HASH = "com.venmo.pin.pinputview_pin";
     private static final String KEY_PR_SALT = "com.venmo.pin.pr_salt";
 
@@ -54,18 +53,18 @@ public class PinHelper {
     }
 
     public static boolean hasDefaultPinSaved(Context c) {
-        return getDefaultSharedPreferences(c).getString(KEY_PINPUT_PIN_HASH, null) != null;
+        return getPinSharedPreferences(c).getString(KEY_PINPUT_PIN_HASH, null) != null;
     }
 
     public static void resetDefaultSavedPin(Context c) {
-        getDefaultSharedPreferences(c).edit()
+        getPinSharedPreferences(c).edit()
                 .clear()
                 .commit();
     }
 
     public static boolean doesMatchDefaultPin(Context c, String pin) {
         try {
-            SharedPreferences def = getDefaultSharedPreferences(c);
+            SharedPreferences def = getPinSharedPreferences(c);
             return validate(pin.toCharArray(),
                     getPinHashFromPreferences(def),
                     getSaltFromPreferences(def));
@@ -82,7 +81,7 @@ public class PinHelper {
             final byte[] hash = hash(pin.toCharArray(), salt);
 
             // save salt & pin after successful hashing
-            saveToPreferences(getDefaultSharedPreferences(context), salt, hash);
+            saveToPreferences(getPinSharedPreferences(context), salt, hash);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("error saving pin: ", e);
         } catch (InvalidKeySpecException e) {
@@ -121,4 +120,7 @@ public class PinHelper {
         return Base64.decode(src, Base64.DEFAULT);
     }
 
+    private static SharedPreferences getPinSharedPreferences(Context context) {
+        return context.getSharedPreferences(KEY_SHARED_PREFS, Context.MODE_PRIVATE);
+    }
 }
